@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/semantic.min.css">
+	<script src="../static/js/semantic.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+	<div class="container">		
+		{% if number, dialog %}				
+			<div class="dialog">
+				<div class="dialog_tmp">	
+					<div class="dialog_content">
+						<p style="text-align:left; font-size:20px;"> {{number}} </p>
+						{{dialog}}								
+					</div>	
+				</div>
+			</div>
+			<div class="question">
+				<div class="question_content">
+					{% if number != 2 %}
+					<form method="post" action="{{ url_for('next') }}">
+					{% else %}
+					<form method="post" action="{{ url_for('submit') }}">
+					{% endif %}
+					<div class="ui form">
+						<input type="hidden" name="id" value="{{number}}">
+						<table class="ui striped table">
+					  		<thead>
+						    	<tr><th class="nine wide"></th>
+							    <th class="one wide">1(非常不同意)</th>
+							    <th class="one wide">2</th>
+							    <th class="one wide">3</th>
+							    <th class="one wide">4</th>
+							    <th class="one wide">5</th>
+							    <th class="one wide">6</th>
+							    <th class="one wide">7(非常同意)</th></tr>
+						  	</thead>
+						  	<tbody>
+						    	<tr>
+							      <td>1.我能理解這段對話雙方討論的內容</td>
+							      <td><input type="radio" name="q1" value="1"></td>
+							      <td><input type="radio" name="q1" value="2"></td>
+							      <td><input type="radio" name="q1" value="3"></td>
+							      <td><input type="radio" name="q1" value="4"></td>
+							      <td><input type="radio" name="q1" value="5"></td>
+							      <td><input type="radio" name="q1" value="6"></td>
+							      <td><input type="radio" name="q1" value="7"></td>
+						    	</tr>
+							    <tr>
+								    <td>2.我能理解這段對話主要的重要內容</td>
+								    <td><input type="radio" name="q2" value="1"></td>
+								    <td><input type="radio" name="q2" value="2"></td>
+								    <td><input type="radio" name="q2" value="3"></td>
+								    <td><input type="radio" name="q2" value="4"></td>
+								    <td><input type="radio" name="q2" value="5"></td>
+								    <td><input type="radio" name="q2" value="6"></td>
+								    <td><input type="radio" name="q2" value="7"></td>
+							    </tr>
+							    <tr>
+								    <td>3.雙方對於彼此意義傳達有疑義時能夠有更詳細的討論</td>
+								    <td><input type="radio" name="q3" value="1"></td>
+								    <td><input type="radio" name="q3" value="2"></td>
+								    <td><input type="radio" name="q3" value="3"></td>
+								    <td><input type="radio" name="q3" value="4"></td>
+								    <td><input type="radio" name="q3" value="5"></td>
+								    <td><input type="radio" name="q3" value="6"></td>
+								    <td><input type="radio" name="q3" value="7"></td>
+							    </tr>							
+							    <tr>
+								    <td>4.對話的雙方能夠了解彼此想傳達的意思</td>
+								    <td><input type="radio" name="q4" value="1"></td>
+								    <td><input type="radio" name="q4" value="2"></td>
+								    <td><input type="radio" name="q4" value="3"></td>
+								    <td><input type="radio" name="q4" value="4"></td>
+								    <td><input type="radio" name="q4" value="5"></td>
+								    <td><input type="radio" name="q4" value="6"></td>
+								    <td><input type="radio" name="q4" value="7"></td>
+							    </tr>							
+							    <tr>
+								    <td>5.雙方傳達的訊息易於理解</td>
+								    <td><input type="radio" name="q5" value="1"></td>
+								    <td><input type="radio" name="q5" value="2"></td>
+								    <td><input type="radio" name="q5" value="3"></td>
+								    <td><input type="radio" name="q5" value="4"></td>
+								    <td><input type="radio" name="q5" value="5"></td>
+								    <td><input type="radio" name="q5" value="6"></td>
+								    <td><input type="radio" name="q5" value="7"></td>
+							    </tr>							
+							    <tr>
+								    <td>6.對話雙方對於彼此的問題或請求都能快速的回覆</td>
+								    <td><input type="radio" name="q6" value="1"></td>
+								    <td><input type="radio" name="q6" value="2"></td>
+								    <td><input type="radio" name="q6" value="3"></td>
+								    <td><input type="radio" name="q6" value="4"></td>
+								    <td><input type="radio" name="q6" value="5"></td>
+								    <td><input type="radio" name="q6" value="6"></td>
+								    <td><input type="radio" name="q6" value="7"></td>
+							    </tr>							
+							    <tr>
+								    <td>7.對話進行的很順暢，沒有讓人感到不舒服的情況</td>
+								    <td><input type="radio" name="q7" value="1"></td>
+								    <td><input type="radio" name="q7" value="2"></td>
+								    <td><input type="radio" name="q7" value="3"></td>
+								    <td><input type="radio" name="q7" value="4"></td>
+								    <td><input type="radio" name="q7" value="5"></td>
+								    <td><input type="radio" name="q7" value="6"></td>
+								    <td><input type="radio" name="q7" value="7"></td>
+							    </tr>							
+							    <tr>
+								    <td>8.雙方樂意聆聽彼此的觀點與意見</td>
+								    <td><input type="radio" name="q8" value="1"></td>
+								    <td><input type="radio" name="q8" value="2"></td>
+								    <td><input type="radio" name="q8" value="3"></td>
+								    <td><input type="radio" name="q8" value="4"></td>
+								    <td><input type="radio" name="q8" value="5"></td>
+								    <td><input type="radio" name="q8" value="6"></td>
+								    <td><input type="radio" name="q8" value="7"></td>
+							    </tr>							
+							    <tr>
+								    <td>9.當一方提出問題或疑惑時，另一方非常積極的去回應問題方</td>
+								    <td><input type="radio" name="q9" value="1"></td>
+								    <td><input type="radio" name="q9" value="2"></td>
+								    <td><input type="radio" name="q9" value="3"></td>
+								    <td><input type="radio" name="q9" value="4"></td>
+								    <td><input type="radio" name="q9" value="5"></td>
+								    <td><input type="radio" name="q9" value="6"></td>
+								    <td><input type="radio" name="q9" value="7"></td>
+							    </tr>							
+							    <tr>
+								    <td>10.其中一方，或雙方回話不熱絡</td>
+								    <td><input type="radio" name="q10" value="1"></td>
+								    <td><input type="radio" name="q10" value="2"></td>
+								    <td><input type="radio" name="q10" value="3"></td>
+								    <td><input type="radio" name="q10" value="4"></td>
+								    <td><input type="radio" name="q10" value="5"></td>
+								    <td><input type="radio" name="q10" value="6"></td>
+								    <td><input type="radio" name="q10" value="7"></td>
+							    </tr>							
+							</tbody>
+						</table>										
+					</div>		  
+					</br>
+					<!-- submit button -->
+					{% if number != 2 %}
+					<input type="submit" class="ui green button" id="next_btn" value="下一題→">
+					{% else %}
+					<input type="submit" class="ui green button" id="submit_btn" value="送出">
+					{% endif %}
+					</form>		
+				</div>					
+			</div>
+		{% endif %}		
+	</div>
+</body>
+</html>	
