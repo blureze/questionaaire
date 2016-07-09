@@ -3,13 +3,6 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
-url = "doraemon.iis.sinica.edu.tw"
-db_name = "emotion_push"
-collection_name = "log"	# need to change
-
-client = MongoClient(url)
-db = client[db_name]
-collection = db[collection_name]
 
 dialog = []
 user = {1:[1,2], 2:[2,1]}
@@ -51,8 +44,6 @@ def next():
 	q5 = request.form['q5']
 	q6 = request.form['q6']				
 	q7 = request.form['q7']				
-	#self.collection.insert_one(data) # insert a row.
-	#self.collection.find("MongoDB Query Language") # find specific rows according the query.
 
 	print (q1, q2, q3, q4, q5, q6, q7)
 	return render_template('evaluate.html', number = form_id+1, dialog = topic[form_id])
@@ -67,8 +58,6 @@ def submit():
 	q5 = request.form['q5']
 	q6 = request.form['q6']				
 	q7 = request.form['q7']		
-	#self.collection.insert_one(data) # insert a row.
-	#self.collection.find("MongoDB Query Language") # find specific rows according the query.
 
 	print (q1, q2)
 	return render_template('submit.html')
