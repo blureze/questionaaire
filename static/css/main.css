@@ -9,14 +9,14 @@ body {
 }
 
 .container {
-	width: 90%;
+	width: 95%;
 	height: 100%;
 	margin: 0 auto;
 }
 
 .dialog {
 	float: left;
-	width: 38%;
+	width: 33%;
 	height: 100%;
 	
 	/*background-color: blue;*/
@@ -49,7 +49,7 @@ body {
 
 .question {
 	float: right;
-	width: 60%;
+	width: 65%;
 	height: 100%;
 	/*background-color: orange;*/
 }
