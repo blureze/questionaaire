@@ -5,25 +5,46 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/semantic.min.css">
 	<script src="../static/js/semantic.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	
+	<script type="text/javascript">
+		function validateForm() {
+		    var q1 = document.forms["myForm"]["q1"].value;
+		    var q2 = document.forms["myForm"]["q2"].value;
+		    var q3 = document.forms["myForm"]["q3"].value;
+		    var q4 = document.forms["myForm"]["q4"].value;
+		    var q5 = document.forms["myForm"]["q5"].value;
+		    var q6 = document.forms["myForm"]["q6"].value;
+		    var q7 = document.forms["myForm"]["q7"].value;
+		    var q8 = document.forms["myForm"]["q8"].value;
+		    var q9 = document.forms["myForm"]["q9"].value;
+		    var q10 = document.forms["myForm"]["q10"].value;
+  	
+		    if(q1 == "" || q2 == "" || q3 == "" || q4 == "" || q5 == "" || q6 == "" || q7 == "" || q8 == "" || q9 == "" || q10 == "") {
+		    	alert("請檢查所有欄位是否都有勾選");
+		    	return false;
+		    }
+		}
+	</script>
+
+
 </head>
 <body>
 	<div class="container">		
-		{% if number and dialog %}				
+		{% if number and dialog%}				
 			<div class="dialog">
 				<div class="dialog_tmp">	
 					<div class="dialog_content">
-						<p style="text-align:left; font-size:20px;"> {{number}} </p>
+						<p class="content"> {{number}} </p>
 						{{dialog}}								
 					</div>	
 				</div>
 			</div>
 			<div class="question">
 				<div class="question_content">
-					{% if number != 2 %}
-					<form method="post" action="{{ url_for('next') }}">
+					{% if number != 6 %}
+					<form method="post" name="myForm" onsubmit="return validateForm()" action="{{ url_for('next') }}">
 					{% else %}
-					<form method="post" action="{{ url_for('submit') }}">
+					<form method="post" name="myForm" onsubmit="return validateForm()" action="{{ url_for('submit') }}">
 					{% endif %}
 					<div class="ui form">
 						<input type="hidden" name="id" value="{{number}}">
@@ -145,7 +166,7 @@
 					</div>		  
 					</br>
 					<!-- submit button -->
-					{% if number != 2 %}
+					{% if number != 6 %}
 					<input type="submit" class="ui green button" id="next_btn" value="下一題→">
 					{% else %}
 					<input type="submit" class="ui green button" id="submit_btn" value="送出">

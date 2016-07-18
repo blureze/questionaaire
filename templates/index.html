@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="../static/css/semantic.min.css">
+	<script>
+		function start() {
+			userid = document.getElementById("userid").value;
+			window.location = window.location.href + userid;
+		}
+	</script>
+</head>
+<body>
+	<div>
+		User ID: <input type="text" name="userid" id="userid"></br>
+		<button id="start_btn" onclick="start()">Start</button>
+	</div>
+</body>
+</html>
