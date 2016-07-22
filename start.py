@@ -14,11 +14,13 @@ collection = db[collection_name]	# table
 
 dialog = []		# store all the dialog in the list
 user = {1:[2, 8, 14, 5, 17, 11], 2:[2, 9, 13, 5, 17, 11], 3:[3, 9, 15, 6, 18, 12],
-        4:[3, 8, 14, 6, 18, 12], 5:[1, 7, 13, 4, 10, 16], 6:[1, 7, 15, 4, 10, 16],
+        4:[3, 7, 14, 6, 18, 12], 5:[1, 8, 13, 4, 10, 16], 6:[1, 7, 15, 4, 10, 16],
         7:[19, 25, 35, 24, 30, 31], 8:[19, 25, 36, 23, 29, 31], 9:[20, 26, 22, 34, 28, 32],
-        10:[20, 26, 22, 34, 28, 32], 11:[21, 27, 24, 29, 35, 33], 12:[21, 27, 23, 30, 36, 33]}	# record the user and the dialog they should evaluate
+        10:[20, 26, 22, 34, 28, 32], 11:[21, 27, 24, 29, 35, 33], 12:[21, 27, 23, 30, 36, 33],
+        13:[1,6,9,12,13,14,18,19,21,24,25,28,30,32,33,34,35,36], 14:[1,6,9,12,13,14,18,19,21,24,25,28,30,32,33,34,35,36],
+        15:[2,3,4,5,7,8,10,11,15,16,17,20,22,23,26,27,29,31], 16:[2,3,4,5,7,8,10,11,15,16,17,20,22,23,26,27,29,31]}	# record the user and the dialog they should evaluate
 # user = {1: ["4","5","6","10"]}
-topic = {}	# store the dialog which the current user should evaluate
+# topic = {}	# store the dialog which the current user should evaluate
 content = ""	# temperate store the dialog read from the file
 
 def post(userid, dialog_id, answer, time):
@@ -42,7 +44,8 @@ def start(userid = None):	# render the first dialog to the user
 	if userid:
 		# get dialog topic for the user	
 		collect = db['plan_b_conversation']	# table
-		index = 0
+		# index = 0
+		'''
 		for item in user[userid]:
 			cursor = collect.find({'dialog_id': item}).sort("order",1)
 			dialog = ""
@@ -50,11 +53,17 @@ def start(userid = None):	# render the first dialog to the user
 				speaker = document['speaker']
 				dialog += speaker + ": " + document['content'].replace('\n', '</br>')
 			
-			topic[index] = Markup(dialog)
-			index += 1
-
+			# topic[index] = Markup(dialog)
+			# index += 1
+		'''
+		cursor = collect.find({'dialog_id': user.get(userid)[0]}).sort("order",1)
+		dialog = ""
+		for document in cursor:
+			speaker = document['speaker']
+			dialog += speaker + ": " + document['content'].replace('\n', '</br>')		
+		topic = Markup(dialog)
 		# store the cookie
-		resp = make_response(render_template('evaluate.html', number = 1, dialog = topic[0]))
+		resp = make_response(render_template('evaluate.html', number = 1, dialog = topic, userid = userid))
 		resp.set_cookie('userid', str(userid))
 		# resp.set_cookie('number', str(user[userid][0]))
 		return resp
@@ -65,6 +74,15 @@ def next():
 	form_id = int(request.form['id'])
 	userid = int(request.cookies.get('userid'))
 	dialog_id = user.get(userid)[form_id-1]
+	
+	next_dialog = user.get(userid)[form_id]
+	collect = db['plan_b_conversation']
+	cursor = collect.find({'dialog_id': next_dialog}).sort("order",1)
+	dialog = ""
+	for document in cursor:
+		speaker = document['speaker']
+		dialog += speaker + ": " + document['content'].replace('\n', '</br>')		
+	topic = Markup(dialog)
 
 	# get the answer
 	q1 = request.form['q1']
@@ -82,7 +100,7 @@ def next():
 
 	post(userid, dialog_id, answer, time)
 	
-	return render_template('evaluate.html', number = form_id+1, dialog = topic[form_id])
+	return render_template('evaluate.html', number = form_id+1, dialog = topic, userid = userid)
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -108,5 +126,5 @@ def submit():
 	return render_template('submit.html')
 
 if __name__ == "__main__":
-    app.run(debug=True)
-    # app.run(host='0.0.0.0', port=2468)
+    # app.run(debug=True)
+    app.run(host='0.0.0.0', port=2468)

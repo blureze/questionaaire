@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8" />
 	<link rel="stylesheet" type="text/css" href="../static/css/semantic.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/styles.css" >
 	<script>
 		function start() {
 			userid = document.getElementById("userid").value;
@@ -10,8 +12,40 @@
 	</script>
 </head>
 <body>
+	<div id="doc" class="yui-t2">
+	  <div id="hd">
+	    <div id="header"></div>
+	  </div>
+	  <div id="bd">
+	    <div id="yui-main">
+	      <div class="yui-b">
+	        <div class="yui-gc">
+	          <div class="yui-u first">
+	            <div class="content" id="content">
+	            	<h1 style="text-align: center;">問卷注意事項：</h1>
+	            	<p>
+	            		1.本問卷旨在評估<b>對話內容的品質</b>，請閱讀左方完整對話後依照右方問卷題目回答，除非網路用語、錯字等因素嚴重影響雙方對話品質，否則對話品質的評估將不考量這些因素。</br></br>
+	            		2.請依信件裡受試者編號填入 User ID，並進行<b> 18 段對話 </b>的評估，每段對話將有<b> 10 題 </b>的評估問卷。</br></br>
+	            		3. 填寫問卷過程中，請儘量不要中斷作答。</br>
+	            	</p>
+	            </div>
+	          </div>
+	          <div class="yui-u">
+	            <div class="content"></div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="yui-b">
+	      <div id="secondary"></div>
+	    </div>
+	  </div>
+	  <div id="ft">
+	    <div id="footer"></div>
+	  </div>
+	</div>	
 	<div>
-		User ID: <input type="text" name="userid" id="userid"></br>
+		User ID: <input type="text" name="userid" id="userid">
 		<button id="start_btn" onclick="start()">Start</button>
 	</div>
 </body>

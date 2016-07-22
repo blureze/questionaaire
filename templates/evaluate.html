@@ -30,7 +30,7 @@
 </head>
 <body>
 	<div class="container">		
-		{% if number and dialog%}				
+		{% if number and dialog and userid%}				
 			<div class="dialog">
 				<div class="dialog_tmp">	
 					<div class="dialog_content">
@@ -40,13 +40,14 @@
 				</div>
 			</div>
 			<div class="question">
-				<div class="question_content">
-					{% if number != 6 %}
+				<div class="question_content">	
+					{% if number != 18 %}
 					<form method="post" name="myForm" onsubmit="return validateForm()" action="{{ url_for('next') }}">
 					{% else %}
 					<form method="post" name="myForm" onsubmit="return validateForm()" action="{{ url_for('submit') }}">
-					{% endif %}
-					<div class="ui form">
+					{% endif %}		
+					
+						<div class="ui form">
 						<input type="hidden" name="id" value="{{number}}">
 						<table class="ui single line table">
 					  		<thead>
@@ -166,7 +167,7 @@
 					</div>		  
 					</br>
 					<!-- submit button -->
-					{% if number != 6 %}
+					{% if number != 18 %}
 					<input type="submit" class="ui green button" id="next_btn" value="下一題→">
 					{% else %}
 					<input type="submit" class="ui green button" id="submit_btn" value="送出">
